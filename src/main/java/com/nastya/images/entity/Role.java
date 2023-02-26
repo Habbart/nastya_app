@@ -1,26 +1,31 @@
 package com.nastya.images.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
-import java.util.Set;
+import javax.validation.constraints.NotBlank;
 import java.util.UUID;
 
-
 @Entity
+@NoArgsConstructor
 @Getter
 @Setter
-public class ImageType extends BaseEntity {
+public class Role extends BaseEntity {
 
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "id", columnDefinition = "VARCHAR(255)")
     private UUID id;
-    @OneToMany
 
-    private Set<Image> images;
+    @NotBlank
+    @Column(name = "role_name")
+    private String name;
 
 }
