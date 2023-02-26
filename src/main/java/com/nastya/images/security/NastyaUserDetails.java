@@ -21,7 +21,7 @@ public class NastyaUserDetails implements UserDetails {
         return grantedAuthorities;
     }
 
-    public static org.springframework.security.core.userdetails.UserDetails fromEntityToWarehouseUserDetails(User user){
+    public static NastyaUserDetails fromEntityToWarehouseUserDetails(User user){
         NastyaUserDetails nastyaUserDetails = new NastyaUserDetails();
         nastyaUserDetails.login = user.getLogin();
         nastyaUserDetails.password = user.getPassword();
