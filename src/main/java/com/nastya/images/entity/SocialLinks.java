@@ -13,7 +13,7 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
-public class SocialMediaLinks extends BaseEntity {
+public class SocialLinks extends BaseEntity {
 
     @Id
     @GeneratedValue(generator = "uuid2")
