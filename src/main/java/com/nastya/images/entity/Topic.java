@@ -3,22 +3,46 @@ package com.nastya.images.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+
+import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
-@Data
-@NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
 @Entity
-@Table (name = "topic")
-public class Topic extends BaseEntity{
+@Table(name = "topic")
+public class Topic extends BaseEntity {
 
     @Id
-    @GeneratedValue(generator = "uuid")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(name = "id", columnDefinition = "VARCHAR(255)")
+    @Column(name = "id", nullable = false, columnDefinition = "VARCHAR(255)")
     private UUID id;
 
     @Column(name = "name", nullable = false)
     private String name;
+
+    @ToString.Exclude
+    @ManyToMany
+    @JoinTable(name = "work_topic",
+            joinColumns = @JoinColumn(name = "topic_id"),
+            inverseJoinColumns = @JoinColumn(name = "work_id"))
+    private Set<Work> portfolioImages;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Topic topic = (Topic) o;
+        return Objects.equals(id, topic.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
