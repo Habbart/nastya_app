@@ -1,13 +1,13 @@
 CREATE TABLE IF NOT EXISTS social_network
 (
-    id          SMALLSERIAL PRIMARY KEY,
+    id          SERIAL PRIMARY KEY,
     description TEXT NOT NULL,
     url         TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS role
 (
-    id   SMALLSERIAL PRIMARY KEY,
+    id   SERIAL PRIMARY KEY,
     name VARCHAR(30) NOT NULL UNIQUE
 );
 
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS work
     id             VARCHAR(255) PRIMARY KEY,
     title          VARCHAR(255) NOT NULL,
     url            TEXT,
-    title_image_id VARCHAR(255) REFERENCES image (id) UNIQUE
+    title_image_id VARCHAR(255) REFERENCES title_image(id) UNIQUE
 );
 
 CREATE TABLE IF NOT EXISTS image
@@ -41,9 +41,9 @@ CREATE TABLE IF NOT EXISTS topic
 
 CREATE TABLE IF NOT EXISTS users
 (
-    id       SMALLSERIAL PRIMARY KEY,
+    id       SERIAL PRIMARY KEY,
     name     VARCHAR(50)                    NOT NULL,
     login    VARCHAR(50)                    NOT NULL UNIQUE,
     password VARCHAR(50)                    NOT NULL,
-    role_id  SMALLINT REFERENCES users (id) NOT NULL
+    role_id  INT REFERENCES users (id) NOT NULL
 );

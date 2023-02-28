@@ -14,7 +14,7 @@ public class SocialNetwork extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Short id;
+    private Integer id;
 
     @Column(name = "description", nullable = false)
     private String description;
