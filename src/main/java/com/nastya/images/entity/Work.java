@@ -3,11 +3,8 @@ package com.nastya.images.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
-
-import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
-
 
 @Getter
 @Setter
@@ -45,17 +42,4 @@ public class Work extends BaseEntity {
             joinColumns = @JoinColumn(name = "work_id"),
             inverseJoinColumns = @JoinColumn(name = "topic_id"))
     private Set<Topic> topics;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Work work = (Work) o;
-        return Objects.equals(id, work.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }

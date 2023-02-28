@@ -3,8 +3,6 @@ package com.nastya.images.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
-
-import java.util.Objects;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -24,17 +22,4 @@ public class TitleImage extends BaseEntity {
 
     @Column(name = "path", nullable = false)
     private String path;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        TitleImage titleImage = (TitleImage) o;
-        return Objects.equals(id, titleImage.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }

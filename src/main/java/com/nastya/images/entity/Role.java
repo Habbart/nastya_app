@@ -3,8 +3,6 @@ package com.nastya.images.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
-
-import java.util.Objects;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -23,17 +21,4 @@ public class Role extends BaseEntity {
 
     @Column(name = "name", nullable = false)
     private String name;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Role role = (Role) o;
-        return Objects.equals(id, role.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }
