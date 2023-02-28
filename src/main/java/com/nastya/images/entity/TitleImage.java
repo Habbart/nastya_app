@@ -10,8 +10,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "image")
-public class Image extends BaseEntity {
+@Table (name = "title_image")
+public class TitleImage extends BaseEntity {
 
     @Id
     @GeneratedValue(generator = "uuid")

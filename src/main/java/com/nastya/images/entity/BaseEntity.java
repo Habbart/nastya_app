@@ -1,17 +1,14 @@
 package com.nastya.images.entity;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Version;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 public abstract class BaseEntity {
-
 
     @Version
     @Column(name = "VERSION")
@@ -20,5 +17,4 @@ public abstract class BaseEntity {
     private LocalDateTime creationDate;
     @Column(name = "LAST_UPDATE_DATE")
     private LocalDateTime lastUpdateDate;
-
 }

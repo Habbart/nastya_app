@@ -10,8 +10,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "image")
-public class Image extends BaseEntity {
+@Table (name = "topic")
+public class Topic extends BaseEntity{
 
     @Id
     @GeneratedValue(generator = "uuid")
@@ -19,6 +19,6 @@ public class Image extends BaseEntity {
     @Column(name = "id", columnDefinition = "VARCHAR(255)")
     private UUID id;
 
-    @Column(name = "path", nullable = false)
-    private String path;
+    @Column(name = "name", nullable = false)
+    private String name;
 }
