@@ -8,14 +8,17 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table (name = "role")
-public class Role extends BaseEntity {
+@Table(name = "social_network")
+public class SocialNetwork extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Short id;
 
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "description", nullable = false)
+    private String description;
+
+    @Column(name = "url", nullable = false)
+    private String url;
 }
