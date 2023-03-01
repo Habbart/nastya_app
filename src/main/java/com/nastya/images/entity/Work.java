@@ -6,11 +6,11 @@ import org.hibernate.annotations.GenericGenerator;
 import java.util.Set;
 import java.util.UUID;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
-@NoArgsConstructor
-@AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "work")
 public class Work extends BaseEntity {
@@ -18,21 +18,21 @@ public class Work extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(name = "id", nullable = false, columnDefinition = "VARCHAR(255)")
+    @Column(name = "id", columnDefinition = "VARCHAR(255)")
     private UUID id;
 
-    @Column(name = "title", nullable = false)
+    @Column(name = "title")
     private String title;
 
     @Column(name = "url")
     private String url;
 
     @OneToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "title_image_id", unique = true)
+    @JoinColumn(name = "title_image_id")
     private TitleImage titleImage;
 
     @ToString.Exclude
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "work_id")
     private Set<Image> portfolioImages;
 

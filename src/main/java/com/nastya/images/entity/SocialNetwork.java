@@ -17,12 +17,12 @@ public class SocialNetwork extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(name = "id", nullable = false, columnDefinition = "VARCHAR(255)")
+    @Column(name = "id", columnDefinition = "VARCHAR(255)")
     private UUID id;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description")
     private String description;
 
-    @Column(name = "url", nullable = false)
+    @Column(name = "url")
     private String url;
 }

@@ -3,8 +3,6 @@ package com.nastya.images.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
-
-import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -20,10 +18,10 @@ public class Topic extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(name = "id", nullable = false, columnDefinition = "VARCHAR(255)")
+    @Column(name = "id", columnDefinition = "VARCHAR(255)")
     private UUID id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
 
     @ToString.Exclude
