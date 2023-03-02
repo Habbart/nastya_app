@@ -11,13 +11,13 @@ import java.util.UUID;
 @Setter
 @ToString
 @Entity
-@Table (name = "title_image")
+@Table(name = "title_image")
 public class TitleImage extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(name = "id", columnDefinition = "VARCHAR(255)")
+    @Column(name = "id")
     private UUID id;
 
     @Column(name = "path")

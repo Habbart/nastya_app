@@ -17,7 +17,7 @@ public class SocialNetwork extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(name = "id", columnDefinition = "VARCHAR(255)")
+    @Column(name = "id")
     private UUID id;
 
     @Column(name = "description")
