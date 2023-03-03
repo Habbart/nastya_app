@@ -11,8 +11,8 @@ import java.util.UUID;
 @Setter
 @ToString
 @Entity
-@Table(name = "users")
-public class User extends BaseEntity {
+@Table(name = "social_network")
+public class SocialNetwork extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "uuid")
@@ -20,16 +20,9 @@ public class User extends BaseEntity {
     @Column(name = "id")
     private UUID id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "description")
+    private String description;
 
-    @Column(name = "login")
-    private String login;
-
-    @Column(name = "password")
-    private String password;
-
-    @ManyToOne
-    @JoinColumn(name="role_id")
-    private Role role;
+    @Column(name = "url")
+    private String url;
 }

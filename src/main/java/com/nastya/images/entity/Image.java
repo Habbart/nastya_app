@@ -1,24 +1,25 @@
 package com.nastya.images.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
-
 import java.util.UUID;
 
-@Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
+@ToString
+@Entity
+@Table(name = "image")
 public class Image extends BaseEntity {
 
-        @Id
-        @GeneratedValue(generator = "uuid2")
-        @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
-        @Column(name = "id", columnDefinition = "VARCHAR(255)")
-        private UUID id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(name = "id")
+    private UUID id;
 
-        @ManyToOne
-        private ImageType imageType;
-
+    @Column(name = "path")
+    private String path;
 }

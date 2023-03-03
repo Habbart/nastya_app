@@ -3,6 +3,7 @@ package com.nastya.images.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+import java.util.Set;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -11,8 +12,8 @@ import java.util.UUID;
 @Setter
 @ToString
 @Entity
-@Table(name = "users")
-public class User extends BaseEntity {
+@Table(name = "topic")
+public class Topic extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "uuid")
@@ -23,13 +24,10 @@ public class User extends BaseEntity {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "login")
-    private String login;
-
-    @Column(name = "password")
-    private String password;
-
-    @ManyToOne
-    @JoinColumn(name="role_id")
-    private Role role;
+    @ToString.Exclude
+    @ManyToMany
+    @JoinTable(name = "work_topic",
+            joinColumns = @JoinColumn(name = "topic_id"),
+            inverseJoinColumns = @JoinColumn(name = "work_id"))
+    private Set<Work> portfolioImages;
 }
