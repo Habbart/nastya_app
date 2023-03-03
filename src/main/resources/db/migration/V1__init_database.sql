@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS users
     name             VARCHAR(50)                        NOT NULL,
     login            VARCHAR(50)                        NOT NULL UNIQUE,
     password         VARCHAR(50)                        NOT NULL,
-    role_id          VARCHAR(255) REFERENCES users (id) NOT NULL,
+    role_id          VARCHAR(255) REFERENCES role (id) NOT NULL,
     version          BIGINT,
     creation_date    TIMESTAMP,
     last_update_date TIMESTAMP
