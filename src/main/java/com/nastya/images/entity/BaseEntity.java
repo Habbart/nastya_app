@@ -1,7 +1,6 @@
 package com.nastya.images.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Version;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalDateTime;
