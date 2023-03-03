@@ -1,7 +1,7 @@
 package com.nastya.images.controller;
 
 
-import com.nastya.images.entity.Image;
+import com.nastya.images.entity.Work;
 import com.nastya.images.service.WorkService;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
@@ -18,23 +18,20 @@ public class WorkController {
 
 
     @GetMapping()
-    public List<Image> getWorks(@RequestParam(required = false) List<String> topicIds) {
+    public List<Work> getWorks(@RequestParam(required = false) List<String> topicIds) {
         return mainService.getWorks(topicIds);
     }
 
     @PostMapping()
-    public Image changeWork(@RequestBody Image image){
+    public Work changeWork(@RequestBody Work image) {
         return mainService.changeWork(image);
     }
 
     @DeleteMapping()
-    public String changeWork(@RequestParam @NotBlank String workId,
-                            @RequestParam(required = false) String imageId){
+    public Boolean changeWork(@RequestParam @NotBlank String workId,
+                             @RequestParam(required = false) String imageId) {
         return mainService.deleteWorkOrImage(workId, imageId);
     }
-
-
-
 
 
 }

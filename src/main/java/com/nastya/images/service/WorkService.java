@@ -1,53 +1,72 @@
 package com.nastya.images.service;
 
 import com.nastya.images.dao.ImageDao;
-import com.nastya.images.dao.ImageTypeDao;
-import com.nastya.images.dao.SocialLinksDao;
-import com.nastya.images.entity.Image;
-import com.nastya.images.entity.ImageType;
-import com.nastya.images.entity.SocialLinks;
+import com.nastya.images.dao.TopicDao;
+import com.nastya.images.dao.WorkDao;
+import com.nastya.images.entity.SocialNetwork;
+import com.nastya.images.entity.Topic;
+import com.nastya.images.entity.Work;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class WorkService {
 
+    private static final String WHOOPS = "Что-то пошло не так!";
+    private WorkDao workDao;
     private ImageDao imageDao;
-    private ImageTypeDao imageTypeDao;
-    private SocialLinksDao socialLinksDao;
+    private TopicDao topicDao;
 
-    public List<Image> getWorks(List<String> topicIds) {
-        List<Image> result;
-        if(topicIds.isEmpty()){
-            result = imageDao.findAll();
-        } else {
-            result = imageDao.findByTopicIds(topicIds);
+
+    public List<Work> getWorks(List<String> topicIds) {
+        List<Work> result = new ArrayList<>();
+        try {
+            if (topicIds.isEmpty()) {
+                result = workDao.findAll();
+            } else {
+                result = workDao.findByTopicsIn(topicIds);
+            }
+        } catch (Exception e){
+            log.error(WHOOPS + e);
         }
         return result;
     }
 
-    public Image changeWork(Image image) {
-        return imageDao.save(image);
+    public Work changeWork(Work work) {
+        return workDao.save(work);
     }
 
-    public String deleteWorkOrImage(String workId, String imageId) {
-        if(imageId.isBlank()){
-            imageDao.findById(workId);
+    public Boolean deleteWorkOrImage(String workId, String imageId) {
+        try {
+            if (imageId.isBlank()) {
+                workDao.deleteById(UUID.fromString(workId));
+            } else {
+                imageDao.deleteById(UUID.fromString(imageId));
+            }
+        } catch (Exception e){
+            log.error(WHOOPS + e);
+        }
+        return Boolean.TRUE;
+    }
+
+    public List<Topic> getTopics() {
+        List<Topic> result = new ArrayList<>();
+        try {
+            result = topicDao.findAll();
+        } catch (Exception e){
+            log.error(WHOOPS + e);
         }
         return null;
     }
 
-    public List<ImageType> getTopics() {
-        return null;
-    }
-
-    public Image changeTopicName(ImageType imageType) {
+    public Topic changeTopicName(Topic topic) {
         return null;
     }
 
@@ -55,11 +74,11 @@ public class WorkService {
         return null;
     }
 
-    public List<SocialLinks> getSocialContacts() {
+    public List<SocialNetwork> getSocialContacts() {
         return null;
     }
 
-    public SocialLinks changeSocialLink(SocialLinks link) {
+    public SocialNetwork changeSocialLink(SocialNetwork link) {
         return null;
     }
 
