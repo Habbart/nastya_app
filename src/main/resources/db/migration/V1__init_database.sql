@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS social_network
 (
     id               VARCHAR(255) PRIMARY KEY,
-    description      TEXT      NOT NULL,
+    description      TEXT,
     url              TEXT      NOT NULL,
     version          BIGINT    NOT NULL,
     creation_date    TIMESTAMP NOT NULL,
@@ -77,5 +77,5 @@ CREATE TABLE IF NOT EXISTS work_topic
     version          BIGINT                                               NOT NULL,
     creation_date    TIMESTAMP                                            NOT NULL,
     last_update_date TIMESTAMP                                            NOT NULL,
-    CONSTRAINT UNIQUE (work_id, topic_id)
+    UNIQUE (work_id, topic_id)
 );
