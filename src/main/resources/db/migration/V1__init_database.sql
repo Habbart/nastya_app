@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS social_network
     id               VARCHAR(255) PRIMARY KEY,
     description      TEXT      NOT NULL,
     url              TEXT      NOT NULL,
-    version          BIGINT,
+    version          BIGINT    NOT NULL,
     creation_date    TIMESTAMP NOT NULL,
     last_update_date TIMESTAMP NOT NULL
 );
@@ -74,6 +74,7 @@ CREATE TABLE IF NOT EXISTS work_topic
     id               VARCHAR(255) PRIMARY KEY,
     work_id          VARCHAR(255) REFERENCES work (id) ON DELETE CASCADE  NOT NULL,
     topic_id         VARCHAR(255) REFERENCES topic (id) ON DELETE CASCADE NOT NULL,
+    version          BIGINT                                               NOT NULL,
     creation_date    TIMESTAMP                                            NOT NULL,
     last_update_date TIMESTAMP                                            NOT NULL,
     CONSTRAINT UNIQUE (work_id, topic_id)
