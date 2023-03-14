@@ -52,8 +52,8 @@ class UserDaoTest {
         user.setLogin("login" + i);
         user.setPassword("password" + i);
         user.setVersion(1L + i);
-        user.setCreationDate(LocalDateTime.now());
-        user.setLastUpdateDate(LocalDateTime.now());
+//        user.setCreationDate(LocalDateTime.now());
+//        user.setLastUpdateDate(LocalDateTime.now());
         Role role = roleDao.save(createRole(i));
         user.setRole(role);
         return user;
@@ -63,8 +63,8 @@ class UserDaoTest {
         Role role = new Role();
         role.setName("role" + 1);
         role.setVersion(1L + i);
-        role.setCreationDate(LocalDateTime.now());
-        role.setLastUpdateDate(LocalDateTime.now());
+//        role.setCreationDate(LocalDateTime.now());
+//        role.setLastUpdateDate(LocalDateTime.now());
         return role;
     }
 }
