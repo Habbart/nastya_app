@@ -8,5 +8,6 @@ import java.util.UUID;
 
 public interface WorkDao extends JpaRepository<Work, UUID> {
 
-    List<Work> findByTopicsIn(List<String> topicIds);
+    List<Work> findByWorkTopicsIn(List<String> workTopicIds);
+
 }

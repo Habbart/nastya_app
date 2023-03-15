@@ -4,7 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
-
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -20,10 +21,14 @@ public abstract class BaseEntity {
     private UUID id;
 
     @Version
-    @Column(name = "VERSION")
+    @Column(name = "VERSION", nullable = false)
     private Long version;
-    @Column(name = "CREATION_DATE")
+
+    @CreatedDate
+    @Column(name = "CREATION_DATE", nullable = false, updatable = false)
     private LocalDateTime creationDate;
-    @Column(name = "LAST_UPDATE_DATE")
+
+    @LastModifiedDate
+    @Column(name = "LAST_UPDATE_DATE", nullable = false)
     private LocalDateTime lastUpdateDate;
 }

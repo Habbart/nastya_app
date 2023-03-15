@@ -31,9 +31,9 @@ public class WorkService {
             if (topicIds.isEmpty()) {
                 result = workDao.findAll();
             } else {
-                result = workDao.findByTopicsIn(topicIds);
+                result = workDao.findByWorkTopicsIn(topicIds);
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             log.error(WHOOPS + e);
         }
         return result;
@@ -50,7 +50,7 @@ public class WorkService {
             } else {
                 imageDao.deleteById(UUID.fromString(imageId));
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             log.error(WHOOPS + e);
         }
         return Boolean.TRUE;
@@ -60,7 +60,7 @@ public class WorkService {
         List<Topic> result = new ArrayList<>();
         try {
             result = topicDao.findAll();
-        } catch (Exception e){
+        } catch (Exception e) {
             log.error(WHOOPS + e);
         }
         return null;
