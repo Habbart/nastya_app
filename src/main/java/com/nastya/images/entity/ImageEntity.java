@@ -14,4 +14,7 @@ public class ImageEntity extends BaseEntity {
 
     @Column(name = "path", nullable = false)
     private String path;
+
+    @Column(name = "front_id", nullable = false, unique = true)
+    private String frontId;
 }
