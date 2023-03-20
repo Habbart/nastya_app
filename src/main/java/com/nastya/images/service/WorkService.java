@@ -2,6 +2,9 @@ package com.nastya.images.service;
 
 import com.nastya.images.dao.ImageDao;
 import com.nastya.images.dao.WorkDao;
+import com.nastya.images.entity.SocialNetworkEntity;
+import com.nastya.images.entity.TopicEntity;
+import com.nastya.images.entity.WorkEntity;
 import com.nastya.images.entity.SocialNetwork;
 import com.nastya.images.entity.Work;
 import lombok.RequiredArgsConstructor;
@@ -23,8 +26,8 @@ public class WorkService {
     private ImageDao imageDao;
 
 
-    public List<Work> getWorks(List<String> topicIds) {
-        List<Work> result = new ArrayList<>();
+    public List<WorkEntity> getWorks(List<String> topicIds) {
+        List<WorkEntity> result = new ArrayList<>();
         try {
             if (topicIds.isEmpty()) {
                 result = workDao.findAll();
@@ -37,7 +40,7 @@ public class WorkService {
         return result;
     }
 
-    public Work changeWork(Work work) {
+    public WorkEntity changeWork(WorkEntity work) {
         return workDao.save(work);
     }
 
@@ -52,5 +55,35 @@ public class WorkService {
             log.error(WHOOPS + e);
         }
         return Boolean.TRUE;
+    }
+
+    public List<TopicEntity> getTopics() {
+        List<TopicEntity> result = new ArrayList<>();
+        try {
+            result = topicDao.findAll();
+        } catch (Exception e) {
+            log.error(WHOOPS + e);
+        }
+        return null;
+    }
+
+    public TopicEntity changeTopicName(TopicEntity topic) {
+        return null;
+    }
+
+    public String deleteTopic(String topicId) {
+        return null;
+    }
+
+    public List<SocialNetworkEntity> getSocialContacts() {
+        return null;
+    }
+
+    public SocialNetworkEntity changeSocialLink(SocialNetworkEntity link) {
+        return null;
+    }
+
+    public String deleteSocialLink(String socialLinkId) {
+        return null;
     }
 }

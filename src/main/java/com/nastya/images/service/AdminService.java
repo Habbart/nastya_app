@@ -2,7 +2,7 @@ package com.nastya.images.service;
 
 
 import com.nastya.images.dao.UserDao;
-import com.nastya.images.entity.User;
+import com.nastya.images.entity.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ public class AdminService {
 
     private UserDao userDao;
 
-    public User findByLogin(String userName) {
+    public UserEntity findByLogin(String userName) {
         return userDao.findByLogin(userName);
     }
 }

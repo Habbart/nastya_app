@@ -10,11 +10,11 @@ import lombok.*;
 @ToString
 @Entity
 @Table(name = "social_network")
-public class SocialNetwork extends BaseEntity {
+public class SocialNetworkEntity extends BaseEntity {
 
     @Column(name = "description")
     private String description;
 
-    @Column(name = "url")
+    @Column(name = "url", nullable = false)
     private String url;
 }
