@@ -15,7 +15,6 @@ public class WorkEntity extends BaseEntity {
 
     @Column(name = "title", nullable = false)
     //todo название должно быть уникальным
-    @Column(name = "title")
     private String title;
 
     @Column(name = "url")

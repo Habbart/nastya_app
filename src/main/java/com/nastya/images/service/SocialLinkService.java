@@ -1,7 +1,7 @@
 package com.nastya.images.service;
 
-import com.nastya.images.dao.SocialLinksDao;
-import com.nastya.images.entity.SocialNetwork;
+import com.nastya.images.dao.SocialNetworkDao;
+import com.nastya.images.entity.SocialNetworkEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,17 +15,15 @@ public class SocialLinkService {
 
 
     //todo - придумать как искать социальные сети не вытаскивая id на фронт
-    private SocialLinksDao socialLinksDao;
+    private SocialNetworkDao socialNetworkDao;
 
 
-    public List<SocialNetwork> getSocialContacts() {
-        return socialLinksDao.findAll();
+    public List<SocialNetworkEntity> getSocialContacts() {
+        return socialNetworkDao.findAll();
     }
 
-    public SocialNetwork changeSocialLink(SocialNetwork link) {
-
-        socialLinksDao.findByUrl()
-        return ;
+    public SocialNetworkEntity changeSocialLink(SocialNetworkEntity link) {
+        return null;
     }
 
     public String deleteSocialLink(String socialLinkId) {

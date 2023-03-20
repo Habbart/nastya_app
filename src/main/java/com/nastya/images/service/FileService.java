@@ -3,6 +3,7 @@ package com.nastya.images.service;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.PathResource;
 import org.springframework.core.io.Resource;
@@ -20,18 +21,23 @@ import java.util.Optional;
 
 @Service
 @Slf4j
-@RequiredArgsConstructor
 public class FileService {
 
-    @Value("${image-storage-dir}")
+
     private final Path imageStorageDir;
-    
-    @PostConstruct
-    public void ensureDirectoryExists() throws IOException {
-        if (!Files.exists(this.imageStorageDir)) {
-            Files.createDirectories(this.imageStorageDir);
-        }
+    private final String pathFromParams;
+
+    public FileService(@Value("${image-storage-dir}") String pathFromParams) {
+        this.imageStorageDir = Path.of(pathFromParams);;
+        this.pathFromParams = pathFromParams;
     }
+
+//    @PostConstruct
+//    public void ensureDirectoryExists() throws IOException {
+//        if (!Files.exists(this.imageStorageDir)) {
+//            Files.createDirectories(this.imageStorageDir);
+//        }
+//    }
 
     public String uploadImage(MultipartFile file, String id){
         final String fileExtension = Optional.ofNullable(file.getOriginalFilename())

@@ -2,7 +2,7 @@ package com.nastya.images.service;
 
 
 import com.nastya.images.dao.TopicDao;
-import com.nastya.images.entity.Topic;
+import com.nastya.images.entity.TopicEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,24 +17,24 @@ import static com.nastya.images.Constants.WHOOPS;
 @Slf4j
 public class TopicService {
 
-    private TopicDao topicDao;
+    private TopicDao TopicEntityDao;
 
-    public List<Topic> getTopics() {
-        List<Topic> result = new ArrayList<>();
+    public List<TopicEntity> getTopics() {
+        List<TopicEntity> result = new ArrayList<>();
         try {
-            result = topicDao.findAll();
+            result = TopicEntityDao.findAll();
         } catch (Exception e) {
             log.error(WHOOPS + e);
         }
         return null;
     }
 
-    public Topic changeTopicName(Topic topic) {
+    public TopicEntity changeTopicName(TopicEntity TopicEntity) {
         //todo
         return null;
     }
 
-    public String deleteTopic(String topicId) {
+    public String deleteTopic(String TopicEntityId) {
         //todo
         return null;
     }

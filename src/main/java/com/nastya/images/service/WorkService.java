@@ -5,8 +5,6 @@ import com.nastya.images.dao.WorkDao;
 import com.nastya.images.entity.SocialNetworkEntity;
 import com.nastya.images.entity.TopicEntity;
 import com.nastya.images.entity.WorkEntity;
-import com.nastya.images.entity.SocialNetwork;
-import com.nastya.images.entity.Work;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -60,7 +58,7 @@ public class WorkService {
     public List<TopicEntity> getTopics() {
         List<TopicEntity> result = new ArrayList<>();
         try {
-            result = topicDao.findAll();
+//            result = topicDao.findAll();
         } catch (Exception e) {
             log.error(WHOOPS + e);
         }
