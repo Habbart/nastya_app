@@ -9,9 +9,9 @@ import lombok.*;
 @Setter
 @ToString
 @Entity
-@Table(name = "title_image")
-public class TitleImage extends BaseEntity {
+@Table(name = "role")
+public class RoleEntity extends BaseEntity {
 
-    @Column(name = "path")
-    private String path;
+    @Column(name = "name", nullable = false, unique = true)
+    private String name;
 }

@@ -1,7 +1,7 @@
 package com.nastya.images.controller;
 
 
-import com.nastya.images.entity.Topic;
+import com.nastya.images.entity.TopicEntity;
 import com.nastya.images.service.WorkService;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
@@ -17,12 +17,12 @@ public class TopicController {
     private WorkService mainService;
 
     @GetMapping()
-    public List<Topic> getTopics() {
+    public List<TopicEntity> getTopics() {
         return mainService.getTopics();
     }
 
     @PostMapping()
-    public Topic changeTopicName(@RequestBody Topic topic) {
+    public TopicEntity changeTopicName(@RequestBody TopicEntity topic) {
         return mainService.changeTopicName(topic);
     }
 

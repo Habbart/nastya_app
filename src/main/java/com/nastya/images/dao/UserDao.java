@@ -1,10 +1,10 @@
 package com.nastya.images.dao;
 
-import com.nastya.images.entity.User;
+import com.nastya.images.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.UUID;
 
-public interface UserDao extends JpaRepository<User, UUID> {
+public interface UserDao extends JpaRepository<UserEntity, UUID> {
 
-    User findByLogin(String login);
+    UserEntity findByLogin(String login);
 }

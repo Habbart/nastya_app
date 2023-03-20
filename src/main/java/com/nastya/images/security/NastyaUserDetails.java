@@ -1,6 +1,6 @@
 package com.nastya.images.security;
 
-import com.nastya.images.entity.User;
+import com.nastya.images.entity.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,7 +21,7 @@ public class NastyaUserDetails implements UserDetails {
         return grantedAuthorities;
     }
 
-    public static NastyaUserDetails fromEntityToWarehouseUserDetails(User user){
+    public static NastyaUserDetails fromEntityToWarehouseUserDetails(UserEntity user){
         NastyaUserDetails nastyaUserDetails = new NastyaUserDetails();
         nastyaUserDetails.login = user.getLogin();
         nastyaUserDetails.password = user.getPassword();

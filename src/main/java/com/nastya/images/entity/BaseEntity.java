@@ -3,11 +3,13 @@ package com.nastya.images.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import java.time.LocalDateTime;
 import java.util.UUID;
+
 
 @Getter
 @Setter
@@ -24,11 +26,11 @@ public abstract class BaseEntity {
     @Column(name = "VERSION", nullable = false)
     private Long version;
 
-    @CreatedDate
+    @CreationTimestamp
     @Column(name = "CREATION_DATE", nullable = false, updatable = false)
     private LocalDateTime creationDate;
 
-    @LastModifiedDate
+    @UpdateTimestamp
     @Column(name = "LAST_UPDATE_DATE", nullable = false)
     private LocalDateTime lastUpdateDate;
 }

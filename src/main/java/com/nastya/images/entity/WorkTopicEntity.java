@@ -13,13 +13,13 @@ import lombok.*;
 @ToString
 @Entity
 @Table(name = "work_topic")
-public class WorkTopic extends BaseEntity {
+public class WorkTopicEntity extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "work_id")
-    private Work work;
+    private WorkEntity work;
 
     @ManyToOne
     @JoinColumn(name = "topic_id")
-    private Topic topic;
+    private TopicEntity topic;
 }
