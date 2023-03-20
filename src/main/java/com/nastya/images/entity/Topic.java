@@ -13,6 +13,7 @@ import java.util.Set;
 @Table(name = "topic")
 public class Topic extends BaseEntity {
 
+    //todo имя топика должно быть уникальным, по нему будем искать
     @Column(name = "name")
     private String name;
 

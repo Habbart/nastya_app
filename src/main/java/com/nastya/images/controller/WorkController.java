@@ -19,6 +19,7 @@ public class WorkController {
 
     @GetMapping()
     public List<Work> getWorks(@RequestParam(required = false) List<String> topicIds) {
+        //todo надо передавать имя топика а не id, переделать на имя
         return mainService.getWorks(topicIds);
     }
 

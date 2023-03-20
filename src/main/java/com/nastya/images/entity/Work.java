@@ -13,6 +13,7 @@ import java.util.Set;
 @Table(name = "work")
 public class Work extends BaseEntity {
 
+    //todo название должно быть уникальным
     @Column(name = "title")
     private String title;
 
