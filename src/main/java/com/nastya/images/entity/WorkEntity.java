@@ -14,6 +14,7 @@ import java.util.Set;
 public class WorkEntity extends BaseEntity {
 
     @Column(name = "title", nullable = false)
+    //todo название должно быть уникальным
     private String title;
 
     @Column(name = "url")

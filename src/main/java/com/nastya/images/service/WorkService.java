@@ -1,7 +1,6 @@
 package com.nastya.images.service;
 
 import com.nastya.images.dao.ImageDao;
-import com.nastya.images.dao.TopicDao;
 import com.nastya.images.dao.WorkDao;
 import com.nastya.images.entity.SocialNetworkEntity;
 import com.nastya.images.entity.TopicEntity;
@@ -14,15 +13,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import static com.nastya.images.Constants.WHOOPS;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class WorkService {
 
-    private static final String WHOOPS = "Что-то пошло не так!";
     private WorkDao workDao;
     private ImageDao imageDao;
-    private TopicDao topicDao;
 
 
     public List<WorkEntity> getWorks(List<String> topicIds) {
@@ -59,7 +58,7 @@ public class WorkService {
     public List<TopicEntity> getTopics() {
         List<TopicEntity> result = new ArrayList<>();
         try {
-            result = topicDao.findAll();
+//            result = topicDao.findAll();
         } catch (Exception e) {
             log.error(WHOOPS + e);
         }

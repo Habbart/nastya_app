@@ -14,6 +14,7 @@ import java.util.Set;
 public class TopicEntity extends BaseEntity {
 
     @Column(name = "name", nullable = false)
+    //todo имя топика должно быть уникальным, по нему будем искать
     private String name;
 
     @OneToMany (mappedBy = "topic")

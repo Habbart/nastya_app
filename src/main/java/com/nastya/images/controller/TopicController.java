@@ -2,7 +2,7 @@ package com.nastya.images.controller;
 
 
 import com.nastya.images.entity.TopicEntity;
-import com.nastya.images.service.WorkService;
+import com.nastya.images.service.TopicService;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -14,20 +14,20 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TopicController {
 
-    private WorkService mainService;
+    private TopicService topicService;
 
     @GetMapping()
     public List<TopicEntity> getTopics() {
-        return mainService.getTopics();
+        return topicService.getTopics();
     }
 
     @PostMapping()
     public TopicEntity changeTopicName(@RequestBody TopicEntity topic) {
-        return mainService.changeTopicName(topic);
+        return topicService.changeTopicName(topic);
     }
 
     @DeleteMapping()
     public String deleteTopic(@RequestParam @NotBlank String topicId) {
-        return mainService.deleteTopic(topicId);
+        return topicService.deleteTopic(topicId);
     }
 }
