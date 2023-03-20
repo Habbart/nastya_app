@@ -11,9 +11,9 @@ import java.util.Set;
 @ToString(exclude = {"portfolioImages", "workTopics"})
 @Entity
 @Table(name = "work")
-public class Work extends BaseEntity {
+public class WorkEntity extends BaseEntity {
 
-    @Column(name = "title")
+    @Column(name = "title", nullable = false)
     private String title;
 
     @Column(name = "url")
@@ -21,12 +21,12 @@ public class Work extends BaseEntity {
 
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "title_image_id")
-    private TitleImage titleImage;
+    private TitleImageEntity titleImage;
 
     @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "work_id")
-    private Set<Image> portfolioImages;
+    private Set<ImageEntity> portfolioImages;
 
     @OneToMany(mappedBy = "work")
-    private Set<WorkTopic> workTopics;
+    private Set<WorkTopicEntity> workTopics;
 }

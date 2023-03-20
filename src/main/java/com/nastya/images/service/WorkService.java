@@ -3,9 +3,9 @@ package com.nastya.images.service;
 import com.nastya.images.dao.ImageDao;
 import com.nastya.images.dao.TopicDao;
 import com.nastya.images.dao.WorkDao;
-import com.nastya.images.entity.SocialNetwork;
-import com.nastya.images.entity.Topic;
-import com.nastya.images.entity.Work;
+import com.nastya.images.entity.SocialNetworkEntity;
+import com.nastya.images.entity.TopicEntity;
+import com.nastya.images.entity.WorkEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -25,8 +25,8 @@ public class WorkService {
     private TopicDao topicDao;
 
 
-    public List<Work> getWorks(List<String> topicIds) {
-        List<Work> result = new ArrayList<>();
+    public List<WorkEntity> getWorks(List<String> topicIds) {
+        List<WorkEntity> result = new ArrayList<>();
         try {
             if (topicIds.isEmpty()) {
                 result = workDao.findAll();
@@ -39,7 +39,7 @@ public class WorkService {
         return result;
     }
 
-    public Work changeWork(Work work) {
+    public WorkEntity changeWork(WorkEntity work) {
         return workDao.save(work);
     }
 
@@ -56,8 +56,8 @@ public class WorkService {
         return Boolean.TRUE;
     }
 
-    public List<Topic> getTopics() {
-        List<Topic> result = new ArrayList<>();
+    public List<TopicEntity> getTopics() {
+        List<TopicEntity> result = new ArrayList<>();
         try {
             result = topicDao.findAll();
         } catch (Exception e) {
@@ -66,7 +66,7 @@ public class WorkService {
         return null;
     }
 
-    public Topic changeTopicName(Topic topic) {
+    public TopicEntity changeTopicName(TopicEntity topic) {
         return null;
     }
 
@@ -74,11 +74,11 @@ public class WorkService {
         return null;
     }
 
-    public List<SocialNetwork> getSocialContacts() {
+    public List<SocialNetworkEntity> getSocialContacts() {
         return null;
     }
 
-    public SocialNetwork changeSocialLink(SocialNetwork link) {
+    public SocialNetworkEntity changeSocialLink(SocialNetworkEntity link) {
         return null;
     }
 

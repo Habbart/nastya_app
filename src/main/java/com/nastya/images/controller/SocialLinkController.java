@@ -1,7 +1,7 @@
 package com.nastya.images.controller;
 
 
-import com.nastya.images.entity.SocialNetwork;
+import com.nastya.images.entity.SocialNetworkEntity;
 import com.nastya.images.service.WorkService;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
@@ -17,12 +17,12 @@ public class SocialLinkController {
     private WorkService mainService;
 
     @GetMapping()
-    public List<SocialNetwork> getSocialContacts() {
+    public List<SocialNetworkEntity> getSocialContacts() {
         return mainService.getSocialContacts();
     }
 
     @PostMapping()
-    public SocialNetwork changeSocialLink(@RequestBody SocialNetwork link){
+    public SocialNetworkEntity changeSocialLink(@RequestBody SocialNetworkEntity link){
         return mainService.changeSocialLink(link);
     }
 

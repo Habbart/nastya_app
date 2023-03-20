@@ -10,8 +10,8 @@ import lombok.*;
 @ToString
 @Entity
 @Table(name = "image")
-public class Image extends BaseEntity {
+public class ImageEntity extends BaseEntity {
 
-    @Column(name = "path")
+    @Column(name = "path", nullable = false)
     private String path;
 }
