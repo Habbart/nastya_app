@@ -1,5 +1,7 @@
 package com.nastya.images.service;
 
+import com.nastya.images.exception.DeleteFileException;
+import com.nastya.images.exception.NoImagesFoundException;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -73,6 +75,19 @@ public class FileService {
             return Optional.empty();
         } else {
             return Optional.of(fileName.substring(indexOfLastDot + 1));
+        }
+    }
+
+    public void deleteFileFromDisc(String filename) {
+        final Path targetPath = this.imageStorageDir.resolve(filename);
+        if (!Files.exists(targetPath)) {
+            return;
+        }
+        try {
+            Files.delete(targetPath);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new DeleteFileException(String.format("Ошибка при удалении файла %s", filename));
         }
     }
 }

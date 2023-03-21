@@ -7,5 +7,6 @@ import java.util.UUID;
 
 public interface ImageDao extends JpaRepository<ImageEntity, UUID> {
 
+    ImageEntity findByFrontId(String frontId);
     void deleteByFrontId(String frontId);
 }
