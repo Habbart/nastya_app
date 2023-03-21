@@ -17,4 +17,6 @@ public class ImageEntity extends BaseEntity {
 
     @Column(name = "front_id", nullable = false, unique = true)
     private String frontId;
+
+    private boolean isCoverArt;
 }

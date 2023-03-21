@@ -16,10 +16,11 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class FileController {
 
+    public static final String BANNER = "banner";
     private FileService fileService;
 
     @PostMapping(value = "/{id}", produces = MediaType.TEXT_PLAIN_VALUE)
-    public String uploadImage(@RequestBody MultipartFile imageFile, @PathVariable("id") String id) throws IOException {
+    public String uploadImage(@RequestBody MultipartFile imageFile, @PathVariable("id") String id) {
         return fileService.uploadImage(imageFile, id);
     }
 
@@ -28,5 +29,8 @@ public class FileController {
         return ResponseEntity.ok(fileService.downloadImage(fileName));
     }
 
-
+    @GetMapping("/banners")
+    public Resource getBanners() {
+        return fileService.downloadImage(BANNER);
+    }
 }

@@ -10,4 +10,6 @@ public interface WorkDao extends JpaRepository<WorkEntity, UUID> {
 
     List<WorkEntity> findByWorkTopicsIn(List<String> workTopicIds);
 
+    void deleteByFrontId(String frontId);
+
 }
