@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS work
     id               VARCHAR(255) PRIMARY KEY,
     title            VARCHAR(255) NOT NULL,
     url              TEXT,
+    front_id         TEXT         NOT NULL UNIQUE,
     title_image_id   VARCHAR(255) REFERENCES title_image (id) UNIQUE,
     version          BIGINT       NOT NULL,
     creation_date    TIMESTAMP    NOT NULL,
@@ -41,6 +42,7 @@ CREATE TABLE IF NOT EXISTS image
 (
     id               VARCHAR(255) PRIMARY KEY,
     path             TEXT      NOT NULL,
+    front_id         TEXT      NOT NULL UNIQUE,
     work_id          VARCHAR(255) REFERENCES work (id),
     version          BIGINT    NOT NULL,
     creation_date    TIMESTAMP NOT NULL,
@@ -50,7 +52,7 @@ CREATE TABLE IF NOT EXISTS image
 CREATE TABLE IF NOT EXISTS topic
 (
     id               VARCHAR(255) PRIMARY KEY,
-    name             VARCHAR(50)                       NOT NULL,
+    name             VARCHAR(50)                       NOT NULL UNIQUE,
     work_id          VARCHAR(255) REFERENCES work (id) NOT NULL,
     version          BIGINT                            NOT NULL,
     creation_date    TIMESTAMP                         NOT NULL,

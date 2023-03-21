@@ -20,6 +20,9 @@ public class WorkEntity extends BaseEntity {
     @Column(name = "url")
     private String url;
 
+    @Column(name = "front_id", nullable = false, unique = true)
+    private String frontId;
+
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "title_image_id")
     private TitleImageEntity titleImage;
