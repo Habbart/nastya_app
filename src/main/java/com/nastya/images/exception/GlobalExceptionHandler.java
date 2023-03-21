@@ -14,4 +14,10 @@ public class GlobalExceptionHandler {
     }
 
 
+    @ExceptionHandler
+    public ResponseEntity<String> noSuchImage(CoverDoulbedException exception){
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+
 }

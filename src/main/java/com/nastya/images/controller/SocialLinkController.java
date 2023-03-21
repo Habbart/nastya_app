@@ -1,9 +1,8 @@
 package com.nastya.images.controller;
 
 
-import com.nastya.images.entity.SocialNetworkEntity;
+import com.nastya.images.dto.SocialNetworkDto;
 import com.nastya.images.service.SocialLinkService;
-import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,18 +16,18 @@ public class SocialLinkController {
     private SocialLinkService socialLinkService;
 
     @GetMapping()
-    public List<SocialNetworkEntity> getSocialContacts() {
+    public List<SocialNetworkDto> getSocialContacts() {
         return socialLinkService.getSocialContacts();
     }
 
     @PostMapping()
-    public SocialNetworkEntity changeSocialLink(@RequestBody SocialNetworkEntity link) {
-        return socialLinkService.changeSocialLink(link);
+    public SocialNetworkDto changeSocialLink(@RequestBody SocialNetworkDto dto) {
+        return socialLinkService.changeSocialLink(dto);
     }
 
     @DeleteMapping()
-    public String deleteSocialLink(@RequestParam @NotBlank String socialLinkId) {
-        return socialLinkService.deleteSocialLink(socialLinkId);
+    public String deleteSocialLink(@RequestBody SocialNetworkDto dto) {
+        return socialLinkService.deleteSocialLink(dto);
     }
 
 }

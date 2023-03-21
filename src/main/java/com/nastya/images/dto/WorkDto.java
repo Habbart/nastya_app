@@ -1,20 +1,19 @@
 package com.nastya.images.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Builder;
+import lombok.Data;
 
-import java.util.Set;
+import java.util.List;
 
-@Setter
-@Getter
-@AllArgsConstructor
+@Data
+@Builder
 public class WorkDto {
 
-    private Set<ImageDto> imageDtoSet;
 
     private String frontId;
-
     private String description;
-    //todo это поле можно передавать с аватаркой работы
+    private String title;
+
+    private List<ImageDto> imageDtos;
+    private List<String> imagesIds;
 }

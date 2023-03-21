@@ -6,4 +6,8 @@ import java.util.UUID;
 
 public interface TopicDao extends JpaRepository<TopicEntity, UUID>{
 
+    TopicEntity findByName(String name);
+
+    void deleteByName(String name);
+
 }

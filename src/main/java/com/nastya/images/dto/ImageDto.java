@@ -1,12 +1,8 @@
 package com.nastya.images.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Setter
-@Getter
-@AllArgsConstructor
+@Data
 public class ImageDto {
 
     private String name;
