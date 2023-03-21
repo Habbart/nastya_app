@@ -12,4 +12,6 @@ public interface WorkDao extends JpaRepository<WorkEntity, UUID> {
 
     void deleteByFrontId(String frontId);
 
+    WorkEntity findByFrontId(String frontId);
+
 }

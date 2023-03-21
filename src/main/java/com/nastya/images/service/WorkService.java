@@ -108,15 +108,31 @@ public class WorkService {
     }
 
     public Boolean deleteWorkOrImage(String workId, String imageId) {
+        List<String> fileNamesToDelete = new ArrayList<>();
         try {
             if (imageId.isBlank()) {
+                WorkEntity workEntity = workDao.findByFrontId(workId);
+                fileNamesToDelete.add(workEntity.getTitleImage().getPath());
+                for (ImageEntity portfolioImage : workEntity.getPortfolioImages()) {
+                    fileNamesToDelete.add(portfolioImage.getPath());
+                }
+                //todo надо проверить, что во время удаления работы не удалятся топики, которые есть в других работах
                 workDao.deleteByFrontId(workId);
             } else {
+                ImageEntity imageEntity = imageDao.findByFrontId(imageId);
+                fileNamesToDelete.add(imageEntity.getPath());
                 imageDao.deleteByFrontId(imageId);
             }
+            removeFilesFromDisc(fileNamesToDelete);
         } catch (Exception e) {
             log.error(WHOOPS + e);
         }
         return Boolean.TRUE;
+    }
+
+    private void removeFilesFromDisc(List<String> fileNamesToDelete) {
+        for (String s : fileNamesToDelete) {
+            fileService.deleteFileFromDisc(s);
+        }
     }
 }
