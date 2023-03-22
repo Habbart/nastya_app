@@ -1,5 +1,8 @@
 package com.nastya.images.service;
 
+import com.nastya.images.dao.ImageDao;
+import com.nastya.images.dto.ImageDto;
+import com.nastya.images.entity.ImageEntity;
 import com.nastya.images.exception.DeleteFileException;
 import com.nastya.images.exception.NoImagesFoundException;
 import jakarta.annotation.PostConstruct;
@@ -25,13 +28,14 @@ import java.util.Optional;
 @Slf4j
 public class FileService {
 
-
+    private final ImageDao imageDao;
     private final Path imageStorageDir;
     private final String pathFromParams;
 
-    public FileService(@Value("${image-storage-dir}") String pathFromParams) {
+    public FileService(@Value("${image-storage-dir}") String pathFromParams, ImageDao imageDao) {
         this.imageStorageDir = Path.of(pathFromParams);;
         this.pathFromParams = pathFromParams;
+        this.imageDao = imageDao;
     }
 
 //    @PostConstruct
@@ -41,18 +45,17 @@ public class FileService {
 //        }
 //    }
 
-    public String uploadImage(MultipartFile file, String id){
-        final String fileExtension = Optional.ofNullable(file.getOriginalFilename())
+    public String uploadImage(ImageDto dto){
+        //todo добавить валидацию дто
+        final String fileExtension = Optional.ofNullable(dto.getName())
                 .flatMap(FileService::getFileExtension)
                 .orElse("");
 
-        final String targetFileName = id + "." + fileExtension;
+        final String targetFileName = dto.getFrontId() + "." + fileExtension;
         final Path targetPath = this.imageStorageDir.resolve(targetFileName);
 
-        try (InputStream in = file.getInputStream()) {
-            try (OutputStream outputStream = Files.newOutputStream(targetPath, StandardOpenOption.CREATE)) {
-                in.transferTo(outputStream);
-            }
+        try (OutputStream outputStream = Files.newOutputStream(targetPath, StandardOpenOption.CREATE)) {
+            outputStream.write(dto.getContent());
         } catch (IOException e){
             log.error("Ошибка при сохранении файла" + e);
         }
@@ -60,12 +63,24 @@ public class FileService {
         return targetFileName;
     }
 
-    public Resource downloadImage(String fileName) {
+    public ImageDto downloadImage(String fileName) {
         final Path targetPath = this.imageStorageDir.resolve(fileName);
         if (!Files.exists(targetPath)) {
             throw new IllegalArgumentException("Нет файла с таким именем");
         }
-        return new PathResource(targetPath);
+        PathResource pathResource = new PathResource(targetPath);
+        ImageDto resultDto = new ImageDto();
+        resultDto.setName(pathResource.getFilename());
+        ImageEntity imageEntity = imageDao.findByPath(fileName);
+        String frontId = imageEntity.getFrontId();
+        resultDto.setFrontId(frontId);
+        try(InputStream in = pathResource.getInputStream()){
+            byte[] content = in.readAllBytes();
+            resultDto.setContent(content);
+        } catch (IOException e){
+            log.error("Ошибка при сохранении файла" + e);
+        }
+        return resultDto;
     }
 
     private static Optional<String> getFileExtension(String fileName) {

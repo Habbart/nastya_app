@@ -2,8 +2,10 @@ package com.nastya.images.service;
 
 
 import com.nastya.images.dao.TopicDao;
+import com.nastya.images.dao.WorkTopicDao;
 import com.nastya.images.dto.TopicDto;
 import com.nastya.images.entity.TopicEntity;
+import com.nastya.images.entity.WorkTopicEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,16 +22,19 @@ public class TagService {
 
     private TopicDao topicDao;
 
-    //todo вернуть все теги в порядке убывания их упоминания в работах.
+    private WorkTopicDao workTopicDao;
+
+    //вернуть все теги в порядке убывания их упоминания в работах.
     // Т.е. самый популярный тэг должен быть первым
+    //todo - дописать тест, что всё работает как надо
     public List<String> getAllTags() {
-        List<TopicEntity> result = new ArrayList<>();
+        List<WorkTopicEntity> workTopicEntities = new ArrayList<>();
         try {
-            result = topicDao.findAll();
+            workTopicEntities = workTopicDao.countByTopicPopularity();
         } catch (Exception e) {
             log.error(WHOOPS + e);
         }
-        return null;
+        return workTopicEntities.stream().map(w -> w.getTopic().getName()).toList();
     }
 
     public String changeTagName(TopicDto tagDto) {

@@ -8,14 +8,10 @@ import com.nastya.images.dto.WorkDtoWithTags;
 import com.nastya.images.entity.ImageEntity;
 import com.nastya.images.entity.WorkEntity;
 import com.nastya.images.exception.CoverDoulbedException;
-import com.nastya.images.exception.NoImagesFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,28 +52,20 @@ public class WorkService {
         List<WorkDto> dtos = new ArrayList<>();
         for (WorkEntity workEntity : workEntities) {
 
-            ImageDto imageDto = new ImageDto();
+            ImageDto imageDto = null;
             List<String> imagesIds = new ArrayList<>();
-            byte[] image;
             boolean isFound = false;
             for (ImageEntity portfolioImage : workEntity.getPortfolioImages()) {
                 String imageId = portfolioImage.getFrontId();
                 imagesIds.add(imageId);
                 if (portfolioImage.isCoverArt()) {
                     String path = portfolioImage.getPath();
-                    imageDto.setName(path);
-                    Resource resource = fileService.downloadImage(path);
-                    try (InputStream inputStream = resource.getInputStream()) {
-                        if (isFound) {
-                            throw new CoverDoulbedException(String.format("Найден второй файл с флагом обложки: %s", path));
-                        }
-                        image = inputStream.readAllBytes();
-                    } catch (IOException e) {
-                        log.error(String.format("Ошибка при скачивании файла: %s", path));
-                        throw new NoImagesFoundException(e);
+                    if (isFound) {
+                        throw new CoverDoulbedException(String.format("Найден второй файл с флагом обложки: %s", path));
                     }
+                    //при обращении два раза ходим в базу -> возможное место для оптимизации
+                    imageDto = fileService.downloadImage(path);
                     isFound = true;
-                    imageDto.setContent(image);
                 }
             }
             WorkDto dto = WorkDto.builder()
