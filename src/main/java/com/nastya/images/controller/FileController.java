@@ -1,14 +1,10 @@
 package com.nastya.images.controller;
 
+import com.nastya.images.dto.ImageDto;
 import com.nastya.images.service.FileService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
 
 
 @RestController
@@ -20,17 +16,17 @@ public class FileController {
     private FileService fileService;
 
     @PostMapping(value = "/{id}", produces = MediaType.TEXT_PLAIN_VALUE)
-    public String uploadImage(@RequestBody MultipartFile imageFile, @PathVariable("id") String id) {
-        return fileService.uploadImage(imageFile, id);
+    public String uploadImage(@RequestBody ImageDto dto) {
+        return fileService.uploadImage(dto);
     }
 
     @GetMapping("/{fileName}")
-    public ResponseEntity<Resource> downloadImage(@PathVariable("fileName") String fileName) {
-        return ResponseEntity.ok(fileService.downloadImage(fileName));
+    public ImageDto downloadImage(@PathVariable("fileName") String fileName) {
+        return fileService.downloadImage(fileName);
     }
 
     @GetMapping("/banners")
-    public Resource getBanners() {
+    public ImageDto getBanners() {
         return fileService.downloadImage(BANNER);
     }
 }
