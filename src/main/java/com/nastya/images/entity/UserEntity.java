@@ -3,18 +3,14 @@ package com.nastya.images.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Data
-@NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
 @Entity
 @Table(name = "users")
-public class User extends BaseEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Integer id;
+public class UserEntity extends BaseEntity {
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -26,6 +22,6 @@ public class User extends BaseEntity {
     private String password;
 
     @ManyToOne
-    @JoinColumn(name="role_id", nullable = false)
-    private Role role;
+    @JoinColumn(name="role_id")
+    private RoleEntity role;
 }

@@ -1,9 +1,9 @@
 package com.nastya.images.dao;
 
-import com.nastya.images.entity.Role;
+import com.nastya.images.entity.RoleEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
+import java.util.UUID;
 
-public interface RoleDao extends CrudRepository<Role, Integer> {
+public interface RoleDao extends JpaRepository<RoleEntity, UUID> {
 
 }
