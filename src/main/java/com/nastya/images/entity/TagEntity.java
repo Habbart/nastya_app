@@ -8,14 +8,14 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString(exclude = "workTopics")
+@ToString(exclude = "workTags")
 @Entity
-@Table(name = "topic")
-public class TopicEntity extends BaseEntity {
+@Table(name = "tag")
+public class TagEntity extends BaseEntity {
 
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    @OneToMany (mappedBy = "topic")
-    private Set<WorkTopicEntity> workTopics;
+    @OneToMany (mappedBy = "tag")
+    private Set<WorkTagEntity> workTags;
 }

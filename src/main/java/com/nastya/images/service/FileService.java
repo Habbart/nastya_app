@@ -1,19 +1,13 @@
 package com.nastya.images.service;
 
-import com.nastya.images.dao.ImageDao;
+import com.nastya.images.repository.ImageRepository;
 import com.nastya.images.dto.ImageDto;
 import com.nastya.images.entity.ImageEntity;
 import com.nastya.images.exception.DeleteFileException;
-import com.nastya.images.exception.NoImagesFoundException;
-import jakarta.annotation.PostConstruct;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.PathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,14 +22,14 @@ import java.util.Optional;
 @Slf4j
 public class FileService {
 
-    private final ImageDao imageDao;
+    private final ImageRepository imageRepository;
     private final Path imageStorageDir;
     private final String pathFromParams;
 
-    public FileService(@Value("${image-storage-dir}") String pathFromParams, ImageDao imageDao) {
+    public FileService(@Value("${image-storage-dir}") String pathFromParams, ImageRepository imageRepository) {
         this.imageStorageDir = Path.of(pathFromParams);;
         this.pathFromParams = pathFromParams;
-        this.imageDao = imageDao;
+        this.imageRepository = imageRepository;
     }
 
 //    @PostConstruct
@@ -71,7 +65,7 @@ public class FileService {
         PathResource pathResource = new PathResource(targetPath);
         ImageDto resultDto = new ImageDto();
         resultDto.setName(pathResource.getFilename());
-        ImageEntity imageEntity = imageDao.findByPath(fileName);
+        ImageEntity imageEntity = imageRepository.findByPath(fileName);
         String frontId = imageEntity.getFrontId();
         resultDto.setFrontId(frontId);
         try(InputStream in = pathResource.getInputStream()){

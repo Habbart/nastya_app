@@ -1,7 +1,7 @@
 package com.nastya.images.service;
 
-import com.nastya.images.dao.ImageDao;
-import com.nastya.images.dao.WorkDao;
+import com.nastya.images.repository.ImageRepository;
+import com.nastya.images.repository.WorkRepository;
 import com.nastya.images.dto.ImageDto;
 import com.nastya.images.dto.WorkDto;
 import com.nastya.images.dto.WorkDtoWithTags;
@@ -22,8 +22,8 @@ import static com.nastya.images.Constants.WHOOPS;
 @Slf4j
 public class WorkService {
 
-    private final WorkDao workDao;
-    private final ImageDao imageDao;
+    private final WorkRepository workRepository;
+    private final ImageRepository imageRepository;
     private final FileService fileService;
     private final TagService tagService;
 
@@ -32,9 +32,9 @@ public class WorkService {
         List<WorkEntity> workEntities = new ArrayList<>();
         try {
             if (topicIds.isEmpty()) {
-                workEntities = workDao.findAll();
+                workEntities = workRepository.findAll();
             } else {
-                workEntities = workDao.findByWorkTopicsIn(topicIds);
+                workEntities = workRepository.findByWorkTopicsIn(topicIds);
             }
         } catch (Exception e) {
             log.error(WHOOPS + e);
@@ -99,17 +99,17 @@ public class WorkService {
         List<String> fileNamesToDelete = new ArrayList<>();
         try {
             if (imageId.isBlank()) {
-                WorkEntity workEntity = workDao.findByFrontId(workId);
+                WorkEntity workEntity = workRepository.findByFrontId(workId);
                 fileNamesToDelete.add(workEntity.getTitleImage().getPath());
                 for (ImageEntity portfolioImage : workEntity.getPortfolioImages()) {
                     fileNamesToDelete.add(portfolioImage.getPath());
                 }
                 //todo надо проверить, что во время удаления работы не удалятся топики, которые есть в других работах
-                workDao.deleteByFrontId(workId);
+                workRepository.deleteByFrontId(workId);
             } else {
-                ImageEntity imageEntity = imageDao.findByFrontId(imageId);
+                ImageEntity imageEntity = imageRepository.findByFrontId(imageId);
                 fileNamesToDelete.add(imageEntity.getPath());
-                imageDao.deleteByFrontId(imageId);
+                imageRepository.deleteByFrontId(imageId);
             }
             removeFilesFromDisc(fileNamesToDelete);
         } catch (Exception e) {

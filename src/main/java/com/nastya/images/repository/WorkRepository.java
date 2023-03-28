@@ -1,4 +1,4 @@
-package com.nastya.images.dao;
+package com.nastya.images.repository;
 
 import com.nastya.images.entity.WorkEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -6,9 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.UUID;
 
-public interface WorkDao extends JpaRepository<WorkEntity, UUID> {
+public interface WorkRepository extends JpaRepository<WorkEntity, UUID> {
 
-    List<WorkEntity> findByWorkTopicsIn(List<String> workTopicIds);
+    List<WorkEntity> findByWorkTagIn(List<String> workTagIds);
 
     void deleteByFrontId(String frontId);
 

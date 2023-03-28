@@ -1,7 +1,7 @@
 package com.nastya.images.service;
 
 
-import com.nastya.images.dao.UserDao;
+import com.nastya.images.repository.UserRepository;
 import com.nastya.images.entity.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AdminService {
 
-    private UserDao userDao;
+    private UserRepository userRepository;
 
     public UserEntity findByLogin(String userName) {
-        return userDao.findByLogin(userName);
+        return userRepository.findByLogin(userName);
     }
 }

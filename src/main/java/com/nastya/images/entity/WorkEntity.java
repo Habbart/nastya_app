@@ -8,7 +8,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString(exclude = {"portfolioImages", "workTopics"})
+@ToString(exclude = {"portfolioImages", "workTags"})
 @Entity
 @Table(name = "work")
 public class WorkEntity extends BaseEntity {
@@ -32,5 +32,5 @@ public class WorkEntity extends BaseEntity {
     private Set<ImageEntity> portfolioImages;
 
     @OneToMany(mappedBy = "work")
-    private Set<WorkTopicEntity> workTopics;
+    private Set<WorkTagEntity> workTags;
 }
