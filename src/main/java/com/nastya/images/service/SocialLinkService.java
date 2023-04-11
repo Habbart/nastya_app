@@ -1,6 +1,6 @@
 package com.nastya.images.service;
 
-import com.nastya.images.dao.SocialNetworkDao;
+import com.nastya.images.repository.SocialNetworkRepository;
 import com.nastya.images.dto.SocialNetworkDto;
 import com.nastya.images.entity.SocialNetworkEntity;
 import lombok.RequiredArgsConstructor;
@@ -16,11 +16,11 @@ import java.util.List;
 public class SocialLinkService {
 
 
-    private SocialNetworkDao socialNetworkDao;
+    private SocialNetworkRepository socialNetworkRepository;
 
 
     public List<SocialNetworkDto> getSocialContacts() {
-        List<SocialNetworkEntity> all = socialNetworkDao.findAll();
+        List<SocialNetworkEntity> all = socialNetworkRepository.findAll();
         List<SocialNetworkDto> result = new ArrayList<>();
         for (SocialNetworkEntity entity : all) {
             SocialNetworkDto dto = SocialNetworkDto.builder()
@@ -37,7 +37,7 @@ public class SocialLinkService {
         String description = dto.getDescription();
         String newUrl = dto.getNewUrl();
         String newDescription = dto.getNewDescription();
-        SocialNetworkEntity entity = socialNetworkDao.findByUrlAndDescription(url, description);
+        SocialNetworkEntity entity = socialNetworkRepository.findByUrlAndDescription(url, description);
         if(entity == null){
             entity = new SocialNetworkEntity();
         }
@@ -47,7 +47,7 @@ public class SocialLinkService {
         if(!newUrl.isBlank()) {
             entity.setUrl(newUrl);
         }
-        socialNetworkDao.save(entity);
+        socialNetworkRepository.save(entity);
         //todo определить параметр ответа
         return null;
     }
@@ -56,7 +56,7 @@ public class SocialLinkService {
         //todo добавить проверку, что все параметры ДТО заполнены
         String url = dto.getUrl();
         String description = dto.getDescription();
-        socialNetworkDao.deleteByUrlAndDescription(url, description);
+        socialNetworkRepository.deleteByUrlAndDescription(url, description);
         return "SocialNetwork was successfully deleted";
     }
 }

@@ -1,11 +1,11 @@
 package com.nastya.images.service;
 
 
-import com.nastya.images.dao.TopicDao;
-import com.nastya.images.dao.WorkTopicDao;
-import com.nastya.images.dto.TopicDto;
-import com.nastya.images.entity.TopicEntity;
-import com.nastya.images.entity.WorkTopicEntity;
+import com.nastya.images.repository.TagRepository;
+import com.nastya.images.repository.WorkTagRepository;
+import com.nastya.images.dto.TagDto;
+import com.nastya.images.entity.TagEntity;
+import com.nastya.images.entity.WorkTagEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,35 +20,35 @@ import static com.nastya.images.Constants.WHOOPS;
 @Slf4j
 public class TagService {
 
-    private TopicDao topicDao;
+    private TagRepository tagRepository;
 
-    private WorkTopicDao workTopicDao;
+    private WorkTagRepository workTagRepository;
 
     //вернуть все теги в порядке убывания их упоминания в работах.
     // Т.е. самый популярный тэг должен быть первым
     //todo - дописать тест, что всё работает как надо
     public List<String> getAllTags() {
-        List<WorkTopicEntity> workTopicEntities = new ArrayList<>();
+        List<WorkTagEntity> workTopicEntities = new ArrayList<>();
         try {
-            workTopicEntities = workTopicDao.countByTopicPopularity();
+            workTopicEntities = workTagRepository.countByTopicPopularity();
         } catch (Exception e) {
             log.error(WHOOPS + e);
         }
         return workTopicEntities.stream().map(w -> w.getTopic().getName()).toList();
     }
 
-    public String changeTagName(TopicDto tagDto) {
+    public String changeTagName(TagDto tagDto) {
         //todo добавить валидатор что поля имен не пустые
-        String oldTopicName = tagDto.getOldTopicName();
-        String newTopicName = tagDto.getNewTopicName();
-        TopicEntity entity = topicDao.findByName(oldTopicName);
+        String oldTopicName = tagDto.getOldTagName();
+        String newTopicName = tagDto.getNewTagName();
+        TagEntity entity = tagRepository.findByName(oldTopicName);
         entity.setName(newTopicName);
-        topicDao.save(entity);
+        tagRepository.save(entity);
         return String.format("Tag name was successfully changed form %s to %s", oldTopicName, newTopicName);
     }
 
     public String deleteTag(String tagName) {
-        topicDao.deleteByName(tagName);
+        tagRepository.deleteByName(tagName);
         return String.format("Tag with name %s was successfully deleted", tagName);
     }
 }

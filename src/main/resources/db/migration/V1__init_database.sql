@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS image
     last_update_date TIMESTAMP NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS topic
+CREATE TABLE IF NOT EXISTS tag
 (
     id               VARCHAR(255) PRIMARY KEY,
     name             VARCHAR(50)                       NOT NULL UNIQUE,
@@ -71,13 +71,13 @@ CREATE TABLE IF NOT EXISTS users
     last_update_date TIMESTAMP                         NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS work_topic
+CREATE TABLE IF NOT EXISTS work_tag
 (
     id               VARCHAR(255) PRIMARY KEY,
-    work_id          VARCHAR(255) REFERENCES work (id) ON DELETE CASCADE  NOT NULL,
-    topic_id         VARCHAR(255) REFERENCES topic (id) ON DELETE CASCADE NOT NULL,
-    version          BIGINT                                               NOT NULL,
-    creation_date    TIMESTAMP                                            NOT NULL,
-    last_update_date TIMESTAMP                                            NOT NULL,
-    UNIQUE (work_id, topic_id)
+    work_id          VARCHAR(255) REFERENCES work (id) ON DELETE CASCADE NOT NULL,
+    tag_id           VARCHAR(255) REFERENCES tag (id) ON DELETE CASCADE  NOT NULL,
+    version          BIGINT                                              NOT NULL,
+    creation_date    TIMESTAMP                                           NOT NULL,
+    last_update_date TIMESTAMP                                           NOT NULL,
+    UNIQUE (work_id, tag_id)
 );

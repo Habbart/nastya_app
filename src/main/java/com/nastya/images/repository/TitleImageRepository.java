@@ -1,9 +1,9 @@
-package com.nastya.images.dao;
+package com.nastya.images.repository;
 
 import com.nastya.images.entity.TitleImageEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.UUID;
 
-public interface TitleImageDao extends JpaRepository<TitleImageEntity, UUID> {
+public interface TitleImageRepository extends JpaRepository<TitleImageEntity, UUID> {
 
 }

@@ -1,4 +1,4 @@
-package com.nastya.images.dao;
+package com.nastya.images.repository;
 
 import com.nastya.images.NastyaAppTests;
 import com.nastya.images.entity.RoleEntity;
@@ -13,7 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class UserEntityDaoTest extends NastyaAppTests {
     @Autowired
-    private RoleDao roleDao;
+    private RoleRepository roleRepository;
 
     @Test
     void saveTest() {
@@ -21,7 +21,7 @@ class UserEntityDaoTest extends NastyaAppTests {
         RoleEntity role = new RoleEntity();
         role.setName("role233");
 
-        RoleEntity role2 = roleDao.save(role);
+        RoleEntity role2 = roleRepository.save(role);
 
         Assertions.assertNotNull(role2);
 
